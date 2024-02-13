@@ -9,6 +9,10 @@ function App() {
     setDotCount((prev) => prev + 1);
   };
 
+  /**
+   * Handles the value passed to the screen.
+   * @param {string} value - The value to be handled.
+   */
   const handleAddScreenValue = (value) => {
     if (value === "0") {
       handleZero();
@@ -25,6 +29,12 @@ function App() {
     }
   };
 
+  /**
+   * Handles the input of a number.
+   * If the screen value is "0", it replaces it with the input value.
+   * Otherwise, it appends the input value to the screen value.
+   * @param {string} value - The number value to be handled.
+   */
   const handleNumber = (value) => {
     if (screenValue.length === 1 && screenValue[0] === "0") {
       setScreenValue(value);
@@ -33,6 +43,11 @@ function App() {
     }
   };
 
+  /**
+   * Handles the click event for the zero button.
+   * If the screen value has only one character, it does nothing.
+   * Otherwise, it appends "0" to the screen value.
+   */
   const handleZero = () => {
     if (screenValue.length === 1) {
       return;
@@ -41,11 +56,23 @@ function App() {
     }
   };
 
+  /**
+   * Clears the screen value and resets the dot count.
+   */
   const handleClear = () => {
     setScreenValue("0");
     setDotCount(0);
   };
 
+  /**
+   * Handles the addition of a dot to the screen value.
+   * - Calls the handleDotCount function to increase the dot count value by 1.
+   * - Checks the current screen value and determines the appropriate action:
+   *   - If the screen value length is 1, adds a dot to the value.
+   *   - If the previous value is a math operator, does nothing.
+   *   - If the previous value is not a dot and the dot count is less than 1, adds a dot to the value.
+   *   - Otherwise, returns the previous value without any changes.
+   */
   const handleDot = () => {
     handleDotCount();
     setScreenValue((prev) => {
@@ -61,6 +88,12 @@ function App() {
     });
   };
 
+  /**
+   * Handles the calculation based on the current screen value.
+   * Checks if the last value doesn't end with '.' or any of the math operators.
+   * If valid, evaluates the screen value and updates it.
+   * Resets the error message and dot count.
+   */
   const handleCalculate = () => {
     const prevValue = screenValue[screenValue.length-1];
     if(prevValue === "." || "+-*/".includes(prevValue)){
@@ -72,12 +105,16 @@ function App() {
     setDotCount(0);
   };
 
+  /**
+   * Handles the operators in the calculator.
+   * @param {string} operator - The operator to be handled.
+   */
   const handleOperators = (operator) => {
     const prevValue = screenValue[screenValue.length - 1];
     if (screenValue.length === 1) {
       setScreenValue((prev) => prev + operator);
     } else if (prevValue === "." || "+-*/".includes(prevValue)) {
-      return prev;
+      return prevValue;
     } else {
       setScreenValue((prev) => prev + operator);
       setDotCount(0);
