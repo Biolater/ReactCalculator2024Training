@@ -1,5 +1,24 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 *{
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+
+.calculator__container{
+  background-color: #1e1e1e;
+}
+
+.calculator__button{
+  background-color: #4caf50;
+  color: #fff;
+  padding: 15px 0px;
+}
+
+.calculator__button:hover{
+  background-color: #4caf4fb6;
 }
